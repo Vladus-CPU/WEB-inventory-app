@@ -1,0 +1,105 @@
+.tableContainer {
+    overflow-x: auto;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.inventoryTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.inventoryTable th,
+.inventoryTable td {
+    padding: 12px 16px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.inventoryTable th {
+    background-color: #f9fafb;
+    padding: 14px 16px;
+    font-weight: 600;
+    font-size: 13px;
+    color: #4b5563;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.inventoryTable th:last-child, 
+.inventoryTable td:last-child {
+    text-align: center;
+    width: 1%;
+    white-space: nowrap;
+}
+
+.inventoryTable tr:last-child td {
+    border-bottom: none;
+}
+
+.inventoryTable tr:hover {
+    background-color: #f8fafc;
+}
+
+.photoPreview {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    background-color: #e2e8f0;
+    display: block;
+    margin: 0 auto;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    margin: 0 auto;
+    margin-top: 11px;
+}
+
+.actionBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    min-width: 100px;
+    text-decoration: none;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: white;
+    transition: opacity 0.2s;
+}
+
+.actionBtn:hover {
+    opacity: 0.80;
+}
+
+.btnView { 
+    background-color: #3b82f6; 
+}
+.btnEdit { 
+    background-color: #eab308; 
+}
+.btnDelete {
+     background-color: #ef4444; 
+    }
+
+.emptyState, .errorState, .loadingState {
+    text-align: center;
+    padding: 48px;
+    background: #fff;
+    border-radius: 12px;
+    color: #6b7280;
+}
