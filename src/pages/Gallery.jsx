@@ -2,45 +2,50 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { inventoryApi } from '../services/inventoryApi';
-import InventoryCard from '../components/gallery/InventoryCard';
-import InventoryQuickView from '../components/gallery/InventoryQuickView';
+import InventoryGallery from '../components/gallery/InventoryGallery';
+import FavoritesBar from '../components/gallery/FavoritesBar';
 import styles from './Gallery.module.css';
-import { useFavorites } from '../hooks/useFavorites';
 
 export default function Gallery() {
   const [items, setItems] = useState([]);
-  const [selectedItem, setSelectedItem] = useState(null);
-  const { isFavorite, toggleFavorite } = useFavorites();
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    inventoryApi.getAll()
-      .then(data => setItems(data))
-      .catch(err => console.error(err));
+    const loadItems = async () => {
+      setIsLoading(true);
+      setError('');
+      try {
+        const data = await inventoryApi.getAll();
+        setItems(data);
+      } catch (err) {
+        setError(err.message || 'Помилка завантаження інвентарю');
+        setItems([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadItems();
   }, []);
 
   return (
-    <div>
-      <h1>Каталог інвентарю</h1>
-      <nav>
-        <Link to="/favorites">Улюблені</Link> | <Link to="/admin">Адмін-панель</Link>
-      </nav>
-      <hr />
-      <div className={styles.list}>
-        {items.map(item => (
-          <InventoryCard 
-            key={item.id} 
-            item={item} 
-            onClick={setSelectedItem} 
-            isFavorite={isFavorite(item.id)}
-            onToggleFavorite={toggleFavorite}
-          />
-        ))}
-      </div>
-      
-      <InventoryQuickView 
-        item={selectedItem} 
-        onClose={() => setSelectedItem(null)} 
-      />
+    <div className={styles.pageContainer}>
+      <header className={styles.header}>
+        <div className={styles.headerContent}>
+          <h1 className={styles.title}>Каталог інвентарю</h1>
+          <nav className={styles.nav}>
+            <Link to="/favorites" className={styles.navLink}>Улюблені</Link>
+            <Link to="/admin" className={styles.navLinkAdmin}>Адмін-панель</Link>
+          </nav>
+        </div>
+      </header>
+
+      <FavoritesBar />
+
+      {error && <div className={styles.errorState}>{error}</div>}
+
+      <InventoryGallery items={items} isLoading={isLoading} />
     </div>
   );
 }

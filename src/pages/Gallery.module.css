@@ -1,5 +1,70 @@
-.list {
+.pageContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 20px;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #333;
+}
+
+.header {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.headerContent {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.nav {
+  display: flex;
   gap: 16px;
+  align-items: center;
+}
+
+.navLinkAdmin {
+  text-decoration: none;
+  color: #4b5563;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  transition: all 0.2s ease;
+}
+
+.navLinkAdmin:hover {
+  background-color: #f3f4f6;
+  color: #000000;
+}
+.navLink {
+  text-decoration: none;
+  color: #4b5563;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  transition: all 0.2s ease;
+}
+.navLink:hover {
+  background-color: #f3f4f6;
+  color: #000000;
+}
+.errorState {
+  padding: 16px;
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  text-align: center;
+  font-weight: 500;
 }

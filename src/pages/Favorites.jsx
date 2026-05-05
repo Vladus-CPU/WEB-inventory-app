@@ -1,43 +1,53 @@
-import React from 'react'; 
-import { useState } from 'react';
+import React from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useFavorites } from '../hooks/useFavorites';
-import InventoryCard from '../components/gallery/InventoryCard';
-import InventoryQuickView from '../components/gallery/InventoryQuickView';
+import { inventoryApi } from '../services/inventoryApi';
+import InventoryGallery from '../components/gallery/InventoryGallery';
 import styles from './Gallery.module.css';
 
 export default function Favorites() {
-  const { favorites, isFavorite, toggleFavorite } = useFavorites();
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [allItems, setAllItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('');
+  const { favorites } = useFavorites();
+
+  useEffect(() => {
+    const loadItems = async () => {
+      setIsLoading(true);
+      setError('');
+      try {
+        const data = await inventoryApi.getAll();
+        setAllItems(data);
+      } catch (err) {
+        setError(err.message || 'Помилка завантаження інвентарю');
+        setAllItems([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadItems();
+  }, []);
+  
+  const favoriteItems = allItems.filter(item => 
+    favorites.some(fav => fav.id === item.id)
+  );
 
   return (
-    <div>
-      <h1>Улюблені позиції</h1>
-      <nav>
-        <Link to="/gallery">Назад до галереї</Link>
-      </nav>
-      <hr />
-      
-      {favorites.length === 0 ? (
-        <p>Список порожній.</p>
-      ) : (
-        <div className={styles.list}>
-          {favorites.map(item => (
-            <InventoryCard 
-              key={item.id} 
-              item={item} 
-              onClick={setSelectedItem}
-              isFavorite={isFavorite(item.id)}
-              onToggleFavorite={toggleFavorite}
-            />
-          ))}
+    <div className={styles.pageContainer}>
+      <header className={styles.header}>
+        <div className={styles.headerContent}>
+          <h1 className={styles.title}>Улюблені позиції</h1>
+          <nav className={styles.nav}>
+            <Link to="/gallery" className={styles.navLinkAdmin}>← Назад до галереї</Link>
+          </nav>
         </div>
-      )}
-      
-      <InventoryQuickView 
-        item={selectedItem} 
-        onClose={() => setSelectedItem(null)} 
-      />
+      </header>
+
+      {error && <div className={styles.errorState}>{error}</div>}
+
+      <InventoryGallery items={isLoading ? [] : favoriteItems} isLoading={isLoading} isFavoritesPage={true} />
     </div>
   );
 }

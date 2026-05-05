@@ -1,0 +1,80 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 72px 24px;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  border-radius: 20px;
+  border: 1px dashed #cbd5e1;
+  color: #475569;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+}
+
+.emptyIcon {
+  font-size: 52px;
+  margin-bottom: 16px;
+  opacity: 0.85;
+}
+
+.emptyState h3 {
+  margin: 0 0 8px 0;
+  color: #0f172a;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.emptyState p {
+  margin: 0;
+  color: #64748b;
+}
+
+.skeletonCard {
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
+}
+
+.skeletonImg {
+  height: 210px;
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  animation: loadingShimmer 1.3s infinite;
+}
+
+.skeletonTextWrapper {
+  padding: 16px;
+}
+
+.skeletonTitle {
+  height: 20px;
+  margin-bottom: 12px;
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  animation: loadingShimmer 1.3s infinite;
+  border-radius: 6px;
+}
+
+.skeletonDesc {
+  height: 14px;
+  width: 72%;
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  animation: loadingShimmer 1.3s infinite;
+  border-radius: 6px;
+}
+
+@keyframes loadingShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
