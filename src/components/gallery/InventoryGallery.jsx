@@ -44,8 +44,10 @@ export default function InventoryGallery({ items, isLoading, isFavoritesPage = f
       </div>
       
       <InventoryQuickView 
-        item={selectedItem} 
-        onClose={() => setSelectedItem(null)} 
+        item={selectedItem}
+        onClose={() => setSelectedItem(null)}
+        isFavorite={selectedItem ? isFavorite(selectedItem.id) : false}
+        onToggleFavorite={toggleFavorite}
       />
     </div>
   );

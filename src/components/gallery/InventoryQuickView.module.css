@@ -1,33 +1,78 @@
 .overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  inset: 0;
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  padding: 18px;
+  background: rgba(0, 0, 0, 0.28);
 }
 
 .modal {
-  background-color: #ffffff;
-  padding: 24px;
-  border-radius: 8px;
+  position: relative;
   width: 100%;
-  max-width: 500px;
+  max-width: 560px;
+  background: #fff;
+  border: 1px solid #dbe7f3;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
 .closeBtn {
-  margin-bottom: 16px;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #d7e1ec;
+  border-radius: 50%;
+  background: #fff;
+  color: #334155;
   cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.favBtn {
+  position: absolute;
+  top: 14px;
+  right: 60px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #d7e1ec;
+  border-radius: 50%;
+  background: #fff;
+  color: #ef4444;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.title {
+  margin: 0 0 14px;
+  padding-right: 110px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
 }
 
 .largeImage {
-  width: 100%;
-  height: auto;
-  max-height: 300px;
+  width: 96%;
+  max-height: 320px;
   object-fit: contain;
-  margin-bottom: 16px;
+  display: block;
+  margin-bottom: 14px;
+  padding: 10px;
+  background: #f8fbff;
+  border: 1px solid #e5eef7;
+  border-radius: 14px;
+}
+
+.description {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #475569;
 }
