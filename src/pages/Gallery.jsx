@@ -1,6 +1,9 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { inventoryApi } from '../services/inventoryApi';
+import InventoryCard from '../components/gallery/InventoryCard';
+import styles from './Gallery.module.css';
 
 export default function Gallery() {
   const [items, setItems] = useState([]);
@@ -18,11 +21,11 @@ export default function Gallery() {
         <Link to="/favorites">Улюблені</Link> | <Link to="/admin">Адмін-панель</Link>
       </nav>
       <hr />
-      {items.map(item => (
-        <div key={item.id}>
-          {item.inventory_name}
-        </div>
-      ))}
+      <div className={styles.list}>
+        {items.map(item => (
+          <InventoryCard key={item.id} item={item} />
+        ))}
+      </div>
     </div>
   );
 }
