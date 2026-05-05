@@ -10,7 +10,7 @@ export default function InventoryQuickView({ item, onClose }) {
         <button className={styles.closeBtn} onClick={onClose}>Закрити</button>
         <h2>{item.inventory_name}</h2>
         <img
-          src={item.photo || '/icons.svg'}
+          src={item.photo}
           alt={item.inventory_name}
           className={styles.largeImage}
         />

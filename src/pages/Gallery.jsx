@@ -5,10 +5,12 @@ import { inventoryApi } from '../services/inventoryApi';
 import InventoryCard from '../components/gallery/InventoryCard';
 import InventoryQuickView from '../components/gallery/InventoryQuickView';
 import styles from './Gallery.module.css';
+import { useFavorites } from '../hooks/useFavorites';
 
 export default function Gallery() {
   const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   useEffect(() => {
     inventoryApi.getAll()
@@ -29,6 +31,8 @@ export default function Gallery() {
             key={item.id} 
             item={item} 
             onClick={setSelectedItem} 
+            isFavorite={isFavorite(item.id)}
+            onToggleFavorite={toggleFavorite}
           />
         ))}
       </div>
