@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { inventoryApi } from '../services/inventoryApi';
 import InventoryForm from '../components/inventory/InventoryForm';
+import styles from './AdminPages.module.css';
 
 export default function AdminInventoryCreate() {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -22,17 +23,24 @@ export default function AdminInventoryCreate() {
     };
 
     return (
-        <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto', fontFamily: 'sans-serif' }}>
-            <div style={{ marginBottom: '20px' }}>
-                <Link to="/admin" style={{ color: '#3b82f6', textDecoration: 'none' }}>
-                    ← Назад до списку
-                </Link>
-            </div>
-            
-            <h1 style={{ textAlign: 'center', marginBottom: '30px' }}>Додати новий інвентар</h1>
-            
+        <div className={styles.pageContainer}>
+            <header className={styles.header}>
+                <div>
+                    <h1 className={styles.pageTitle}>Додати новий інвентар</h1>
+                </div>
+
+                <div className={styles.headerActions}>
+                    <Link to="/gallery" className={styles.secondaryLink}>
+                        ← Назад до каталогу
+                    </Link>
+                    <Link to="/admin" className={styles.secondaryLink}>
+                        ← Назад до списку
+                    </Link>
+                </div>
+            </header>
+
             {globalError && (
-                <div style={{ color: '#ef4444', textAlign: 'center', marginBottom: '20px' }}>
+                <div className={`${styles.stateBox} ${styles.errorBox}`}>
                     {globalError}
                 </div>
             )}

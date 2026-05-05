@@ -30,8 +30,9 @@ export default function AdminInventoryDetails() {
             <Link to="/admin" className={pageStyles.backLink}>
                 ← Назад до списку
             </Link>
-
-            <h1 className={pageStyles.pageTitle}>Деталі інвентарю</h1>
+            <div className={pageStyles.titleWrap}>
+                <h1 className={pageStyles.pageTitle}>Деталі предмета</h1>
+            </div>
 
             {loading && <div className={pageStyles.centerMessage}>Завантаження деталей...</div>}
             

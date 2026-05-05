@@ -54,7 +54,9 @@ export default function AdminInventoryEdit() {
                 ← Назад до списку
             </Link>
 
-            <h1 className={pageStyles.pageTitle}>Редагування інвентарю</h1>
+            <div className={pageStyles.titleWrap}>
+                <h1 className={pageStyles.pageTitle}>Редагування предмету</h1>
+            </div>
 
             {loadingData && <div className={pageStyles.centerMessage}>Завантаження даних...</div>}
             

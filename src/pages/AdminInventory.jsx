@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { InventoryContext } from '../store/InventoryContext';
 import { inventoryApi } from '../services/inventoryApi';
 import InventoryTable from '../components/inventory/InventoryTable';
-import styles from '../components/inventory/InventoryTable.module.css';
 import ConfirmModal from '../components/inventory/ConfirmModal';
+import styles from './AdminPages.module.css';
 
 export default function AdminInventory() {
     const { inventory, setInventory, loading, setLoading, error, setError } = useContext(InventoryContext);
@@ -38,7 +38,7 @@ export default function AdminInventory() {
             setIsModalOpen(true);
         }
     };
-    
+
     const handleCloseModal = () => {
         setIsModalOpen(false);
         setItemToDelete(null);
@@ -46,6 +46,7 @@ export default function AdminInventory() {
 
     const handleConfirmDelete = async () => {
         if (!itemToDelete) return;
+
         try {
             await inventoryApi.deleteItem(itemToDelete.id);
             setInventory(prev => prev.filter(item => item.id !== itemToDelete.id));
@@ -57,26 +58,26 @@ export default function AdminInventory() {
     };
 
     return (
-        <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto', fontFamily: 'sans-serif' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <h1>Управління інвентарем складу</h1>
-                <Link
-                    to="/admin/create"
-                    style={{
-                        padding: '10px 16px',
-                        backgroundColor: '#10b981',
-                        color: 'white',
-                        textDecoration: 'none',
-                        borderRadius: '4px'
-                    }}>
-                    + Додати інвентар
-                </Link>
-            </div>
+        <div className={styles.pageContainer}>
+            <header className={styles.header}>
+                <div>
+                    <h1 className={styles.pageTitle}>Управління інвентарем складу</h1>
+                </div>
 
-            {loading && <div className={styles.loadingState}>Завантаження даних...</div>}
+                <div className={styles.headerActions}>
+                    <Link to="/gallery" className={styles.secondaryLink}>
+                        ← Назад до каталогу
+                    </Link>
+                    <Link to="/admin/create" className={styles.primaryLink}>
+                        + Додати інвентар
+                    </Link>
+                </div>
+            </header>
+
+            {loading && <div className={styles.stateBox}>Завантаження даних...</div>}
 
             {error && !loading && (
-                <div className={styles.errorState}>
+                <div className={`${styles.stateBox} ${styles.errorBox}`}>
                     Сталася помилка: {error}. Перевірте підключення до API.
                 </div>
             )}
@@ -84,7 +85,8 @@ export default function AdminInventory() {
             {!loading && !error && (
                 <InventoryTable items={inventory} onDeleteClick={handleDeleteClick} />
             )}
-            <ConfirmModal 
+
+            <ConfirmModal
                 isOpen={isModalOpen}
                 onClose={handleCloseModal}
                 onConfirm={handleConfirmDelete}
